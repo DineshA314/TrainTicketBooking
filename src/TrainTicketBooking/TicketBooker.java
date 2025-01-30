@@ -3,9 +3,9 @@ import java.util.*;
 
 public class TicketBooker {
 	
-	static int availableLowerBerths = 1;
-	static int availableMiddleBerths = 1;
-	static int availableUpperBerths = 1;
+	static int availableLowerBerths =0;
+	static int availableMiddleBerths = 0;
+	static int availableUpperBerths = 01;
 	static int availableRacTickets = 1;
 	static int availableWaitingList = 1;
 	
@@ -45,6 +45,7 @@ public class TicketBooker {
 		availableRacTickets--;
 		racPositions.remove(0);
 		System.out.println("--------------------Added to RAC SUCCESSFULLY--------");
+		 System.out.println(racList.size());
 		
 	}
 	public void addToWaitingList(passenger p, int waitingListInfo, String allotedWl)
@@ -63,9 +64,11 @@ public class TicketBooker {
 	public void cancelTicket(int passengerId)
 	{
 		passenger p = passengers.get(passengerId);
+		
+		
         passengers.remove(Integer.valueOf(passengerId));
         //remove the booked ticket from the list
-        bookedTicketList.remove(Integer.valueOf(passengerId));
+        
 
         //take the booked position which is now free
         int positionBooked = p.number;
@@ -77,26 +80,42 @@ public class TicketBooker {
         { 
           availableLowerBerths++;
           lowerBerthsPositions.add(positionBooked);
+          bookedTicketList.remove(Integer.valueOf(passengerId));
         }
         else if(p.alloted.equals("M"))
         { 
           availableMiddleBerths++;
           middleBerthsPositions.add(positionBooked);
+          bookedTicketList.remove(Integer.valueOf(passengerId));
         }
         else if(p.alloted.equals("U"))
         { 
           availableUpperBerths++;
           upperBerthsPositions.add(positionBooked);
+          bookedTicketList.remove(Integer.valueOf(passengerId));
+        }
+        else if(p.alloted.equals("RAC"))
+        {
+        	availableRacTickets++;
+        	racPositions.add(positionBooked);
+        	racList.remove(Integer.valueOf(passengerId));
+        }
+        else if(p.alloted.equals("WL"))
+        {
+        	availableWaitingList++;
+        	waitingListPositions.add(positionBooked);
+        	waitingList.remove(Integer.valueOf(passengerId));
         }
 	
 	
 	
 	if(racList.size() > 0)
     {
-       
+		
         passenger passengerFromRAC = passengers.get(racList.poll());
-        int positionRac = passengerFromRAC.number;
+        int positionRac = passengerFromRAC.number; 
         racPositions.add(positionRac);
+
         racList.remove(Integer.valueOf(passengerFromRAC.passengerId));
         availableRacTickets++;
 

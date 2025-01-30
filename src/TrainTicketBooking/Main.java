@@ -14,7 +14,7 @@ public class Main {
 			
 			if((p.berthPreference.equals("L") && TicketBooker.availableLowerBerths >0)||
 					(p.berthPreference.equals("M") && TicketBooker.availableMiddleBerths >0)||
-					(p.berthPreference.equals("L") && TicketBooker.availableUpperBerths >0))
+					(p.berthPreference.equals("U") && TicketBooker.availableUpperBerths >0))
 			{
 				System.out.println("Preferred berth Avaiable ");
 				
